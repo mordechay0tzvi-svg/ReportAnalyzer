@@ -1,0 +1,48 @@
+List<string> reports = new()
+{
+    "Romeo,Analyze,4,85.7,Approved",
+    "Sierra,Collect,2,88.5,Approved",
+    "Tango,intel,3,77.2,Approved"
+};
+
+foreach (string line in reports)
+{
+    string[] fields = line.Split(',');
+
+    if (fields.Length != 5)
+    {
+        Console.WriteLine("מספר שדות לא תקין");
+        continue;
+    }
+
+    string reportType = fields[1].Trim();
+    string priorityStr = fields[2].Trim();
+    string scoreStr = fields[3].Trim();
+    string status = fields[4].Trim();
+
+    if (!int.TryParse(priorityStr, out int priority))
+    {
+        Console.WriteLine("Priority אינו מספר שלם תקין");
+        continue;
+    }
+
+    if (priority < 1 || priority > 5)
+    {
+        Console.WriteLine("Priority מחוץ לטווח");
+        continue;
+    }
+
+    if (!double.TryParse(scoreStr, out double score))
+    {
+        Console.WriteLine("Score אינו מספר עשרוני תקין");
+        continue;
+    }
+
+    if (score < 0 || score > 100)
+    {
+        Console.WriteLine("Score מחוץ לטווח");
+        continue;
+    }
+
+    Console.WriteLine("רשומה תקינה");
+}
