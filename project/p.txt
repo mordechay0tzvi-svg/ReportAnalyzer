@@ -11,7 +11,7 @@ foreach (string line in reports)
 
     if (fields.Length != 5)
     {
-        Console.WriteLine("מספר שדות לא תקין");
+        Console.WriteLine();
         continue;
     }
 
@@ -22,27 +22,27 @@ foreach (string line in reports)
 
     if (!int.TryParse(priorityStr, out int priority))
     {
-        Console.WriteLine("Priority אינו מספר שלם תקין");
+        Console.WriteLine("Priority");
         continue;
     }
 
     if (priority < 1 || priority > 5)
     {
-        Console.WriteLine("Priority מחוץ לטווח");
+        Console.WriteLine("Priority ");
         continue;
     }
 
     if (!double.TryParse(scoreStr, out double score))
     {
-        Console.WriteLine("Score אינו מספר עשרוני תקין");
+        Console.WriteLine("Score ");
         continue;
     }
 
     if (score < 0 || score > 100)
     {
-        Console.WriteLine("Score מחוץ לטווח");
+        Console.WriteLine("Score ");
         continue;
     }
 
-    Console.WriteLine("רשומה תקינה");
+    Console.WriteLine("");
 }
