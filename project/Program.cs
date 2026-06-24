@@ -77,6 +77,20 @@
             return count;
         }
 
+        static void AllValidReports(ref int count)
+        {
+            Console.WriteLine("=== All Valid Report ===");
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Unit Name: {UnitName[i]}");
+                Console.WriteLine($"Report Type: {ReportType[i]}");
+                Console.WriteLine($"Priority: {Priority[i]}");
+                Console.WriteLine($"Score: {Score[i]}");
+                Console.WriteLine($"Status: {Status[i]}");
+                Console.WriteLine();
+            }
+        }
+
         static void ScoreStats(double[] scores, ref int count)
         {
             double max = 0;
@@ -134,24 +148,71 @@
             Console.WriteLine();
         }
 
-
+        static void FindHighestScoreApproved(ref int count)
+        {
+            int max = 0;
+            int index = 0;
+            for (int i = 0;i < count;i++)
+            {
+                if (Score[i] > max && Status[i] == StatusType.Approved) {index = i;}
+            }
+            Console.WriteLine("=== Highest Priority Approved Report ===");
+            Console.WriteLine($"Unit: {UnitName[index]}");
+            Console.WriteLine($"Type: {ReportType[index]}");
+            Console.WriteLine($"Priority: {Priority[index]}");
+            Console.WriteLine($"Score: {Score[index]}");
+            Console.WriteLine();
+        }
+        static void AverageScoreByPriority(ref int count)
+        {
+            double p1 = 0; int c1 = 0;
+            double p2 = 0; int c2 = 0;
+            double p3 = 0; int c3 = 0;
+            double p4 = 0; int c4 = 0;
+            double p5 = 0; int c5 = 0;
+            for (int i = 0; i < count; i++)
+            {
+                int currentPriority = Priority[i];
+                switch (currentPriority)
+                {
+                    case 1:
+                        p1 += Score[i];
+                        c1++;
+                        break;
+                    case 2:
+                        p2 += Score[i];
+                        c2++;
+                        break;
+                    case 3:
+                        p3 += Score[i];
+                        c3++;
+                        break;
+                    case 4:
+                        p4 += Score[i];
+                        c4++;
+                        break;
+                    case 5:
+                        p5 += Score[i];
+                        c5++;
+                        break;
+                }
+            }
+            Console.WriteLine("=== Average Score by Priority ===");
+            Console.WriteLine($"Priority 1 Average: {p1/c1}");
+            Console.WriteLine($"Priority 2 Average: {p2/c2}");
+            Console.WriteLine($"Priority 3 Average: {p3/c3}");
+            Console.WriteLine($"Priority 4 Average: {p4/c4}");
+            Console.WriteLine($"Priority 5 Average: {p5/c5}");
+        }
         static void Main()
         {
             int count =FilterGoodOnes();
-            Console.WriteLine("=== All Valid Report ===");
-            for (int i = 0; i < count; i++)
-            {                
-                Console.WriteLine($"Unit Name: {UnitName[i]}");
-                Console.WriteLine($"Report Type: {ReportType[i]}");
-                Console.WriteLine($"Priority: {Priority[i]}");
-                Console.WriteLine($"Score: {Score[i]}");
-                Console.WriteLine($"Status: {Status[i]}");
-                Console.WriteLine();
-            }
+            AllValidReports(ref count);
             ScoreStats(Score, ref count);
             ReportsByStatus(Status, ref count);
             ReportsByType(ReportType, ref count);
-
+            FindHighestScoreApproved(ref count);
+            AverageScoreByPriority(ref count);  
         }
     }
 }
