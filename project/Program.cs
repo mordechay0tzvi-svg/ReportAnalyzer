@@ -40,17 +40,23 @@
         {
             string[] shapedReport = report.Split(',');
             if (shapedReport.Length != 5) { return false; }
-            string unit = shapedReport[0].Trim();
-            if (!Enum.TryParse<TypeType>(shapedReport[1].Trim(), out TypeType type))  { return false; }
-            else if (!int.TryParse(shapedReport[2].Trim(), out int priority))  { return false; }
+            string r0 = shapedReport[0].Trim();
+            string r1 = shapedReport[1].Trim();
+            r1 = char.ToUpper(r1[0]) + r1.Substring(1).ToLower();
+            string r2 = shapedReport[2].Trim();
+            string r3 = shapedReport[3].Trim();
+            string r4 = shapedReport[4].Trim();
+            r4 = char.ToUpper(r4[0]) + r4.Substring(1).ToLower();
+            if (!Enum.TryParse<TypeType>(r1, out TypeType type))  { return false; }
+            else if (!int.TryParse(r2, out int priority))  { return false; }
             else if (priority < 0 || priority > 5) { return false; }
-            else if (!double.TryParse(shapedReport[3].Trim(), out double score))  { return false; }
+            else if (!double.TryParse(r3, out double score))  { return false; }
             else if (score < 0 || score > 100) { return false; }
-            else if (!Enum.TryParse<StatusType>(shapedReport[4].Trim(), out StatusType status))  { return false; }
+            else if (!Enum.TryParse<StatusType>(r4, out StatusType status))  { return false; }
 
             else
             {
-                UnitName[count] = unit;
+                UnitName[count] = r0;
                 ReportType[count] = type;
                 Priority[count] = priority; 
                 Score[count] = score;
