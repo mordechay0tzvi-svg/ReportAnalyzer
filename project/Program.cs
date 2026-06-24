@@ -76,6 +76,26 @@
             Console.WriteLine($"Invalid records: {reports.Length - count}");
             return count;
         }
+
+        static void ScoreStats(double[] scores, ref int count)
+        {
+            double max = 0;
+            double min = 100;
+            double sum = 0;
+            for (int i=0; i < count; i++)
+            {
+                double score = scores[i]; 
+                sum += score;
+                if (score < min) { min = score; }
+                if (score > max) { max = score; }
+            }
+            Console.WriteLine($"Minimun score: {min}");
+            Console.WriteLine($"Maximun score: {max}");
+            Console.WriteLine($"Average score: {sum / scores.Length}");
+        }
+       
+        
+
         static void Main()
         {
             int count =FilterGoodOnes();
@@ -88,7 +108,10 @@
                 Console.WriteLine($"Status: {Status[i]}");
                 Console.WriteLine("");
             }
+            ScoreStats(Score, ref count);
         }
     }
 }
+
+
 
