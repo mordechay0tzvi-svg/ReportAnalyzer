@@ -89,26 +89,69 @@
                 if (score < min) { min = score; }
                 if (score > max) { max = score; }
             }
+            Console.WriteLine("=== Report Statistics ===");
+            Console.WriteLine($"Total reports: {count}");
             Console.WriteLine($"Minimun score: {min}");
             Console.WriteLine($"Maximun score: {max}");
             Console.WriteLine($"Average score: {sum / scores.Length}");
+            Console.WriteLine("");
         }
-       
-        
+        static void ReportsByStatus(StatusType[] status, ref int count)
+        {
+            int pending = 0;
+            int approved = 0;
+            int rejected = 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (status[i] == StatusType.Pending) { pending++; }
+                if (status[i] == StatusType.Approved) { approved++; }
+                if (status[i] == StatusType.Rejected) { rejected++; }
+            }
+            Console.WriteLine("=== Reports by Status ===");
+            Console.WriteLine($"Pending: {pending}");
+            Console.WriteLine($"Approved: {approved}");
+            Console.WriteLine($"Rejected: {rejected}");
+            Console.WriteLine();
+        }
+        static void ReportsByType(TypeType[] status, ref int count)
+        {
+            int collect = 0;
+            int analyze = 0;
+            int intel = 0;
+            int recon = 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (status[i] == TypeType.Collect) { collect++; }
+                if (status[i] == TypeType.Analyze) { analyze++; }
+                if (status[i] == TypeType.Intel) { intel++; }
+                if (status[i] == TypeType.Recon) { recon++; }
+            }
+            Console.WriteLine("=== Reports by Type ===");
+            Console.WriteLine($"Collect: {collect}");
+            Console.WriteLine($"Analyze: {analyze}");
+            Console.WriteLine($"Intel: {intel}");
+            Console.WriteLine($"Recon: {recon}");
+            Console.WriteLine();
+        }
+
 
         static void Main()
         {
             int count =FilterGoodOnes();
+            Console.WriteLine("=== All Valid Report ===");
             for (int i = 0; i < count; i++)
-            {
+            {                
                 Console.WriteLine($"Unit Name: {UnitName[i]}");
                 Console.WriteLine($"Report Type: {ReportType[i]}");
                 Console.WriteLine($"Priority: {Priority[i]}");
                 Console.WriteLine($"Score: {Score[i]}");
                 Console.WriteLine($"Status: {Status[i]}");
-                Console.WriteLine("");
+                Console.WriteLine();
             }
             ScoreStats(Score, ref count);
+            ReportsByStatus(Status, ref count);
+            ReportsByType(ReportType, ref count);
+
         }
     }
 }
