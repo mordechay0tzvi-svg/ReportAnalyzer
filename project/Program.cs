@@ -47,15 +47,15 @@
             string r3 = shapedReport[3].Trim();
             string r4 = shapedReport[4].Trim();
             r4 = char.ToUpper(r4[0]) + r4.Substring(1).ToLower();
-            string error = " ";
-            if (!Enum.TryParse<TypeType>(r1, out TypeType type))  { error += "Report type wrong"; }
-            if (!int.TryParse(r2, out int priority))  { error += "Priority wrong"; }
-            if (priority < 0 || priority > 5) { error += "Priority wrong"; }
-            if (!double.TryParse(r3, out double score))  { error += "Status wrong"; }
-            if (score < 0 || score > 100) { error += "Score wrong"; }
-            if (!Enum.TryParse<StatusType>(r4, out StatusType status))  { error += "Status wrong"; }
+            string error = "|";
+            if (!Enum.TryParse<TypeType>(r1, out TypeType type))  { error += "Report type wrong "; }
+            if (!int.TryParse(r2, out int priority))  { error += "Priority wrong "; }
+            if (priority < 0 || priority > 5) { error += "Priority wrong "; }
+            if (!double.TryParse(r3, out double score))  { error += "Status wrong "; }
+            if (score < 0 || score > 100) { error += "Score wrong "; }
+            if (!Enum.TryParse<StatusType>(r4, out StatusType status))  { error += "Status wrong "; }
 
-            if (error != " ") 
+            if (error != "|") 
             {
                 Console.WriteLine(error);
                 return false; 
@@ -68,6 +68,7 @@
                 Score[count] = score;
                 Status[count] = status;
                 count++;
+                Console.WriteLine("|Report added");
                 return true;
             }
         }
